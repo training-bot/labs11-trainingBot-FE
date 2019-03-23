@@ -1,5 +1,6 @@
 // navigation includes tab navigation, breadcrumbs, user avatar
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
@@ -12,7 +13,7 @@ const faker = require('faker');
 
 const styles = {
 	avatar: {
-		margin: 10,
+		margin: 10
 	},
 
 	appBar: {
@@ -21,18 +22,18 @@ const styles = {
 		flexDirection: 'row',
 		color: 'white',
 		backgroundColor: '',
-		padding: 5,
+		padding: 5
 	},
 	logo: {
 		width: 50,
 		height: 50,
-		marginRight: 10,
+		marginRight: 10
 	},
 	menuItems: {
 		display: 'flex',
 		alignItems: 'center',
-		color: 'white',
-	},
+		color: 'white'
+	}
 };
 
 const appBar = props => {
@@ -47,18 +48,24 @@ const appBar = props => {
 		<>
 			<AppBar className={classes.appBar}>
 				<div className={classes.menuItems}>
-					<img src={logo} alt="logo" className={classes.logo} />
+					<img src={logo} alt='logo' className={classes.logo} />
 					<Button>About</Button>
 					<Button>Contact</Button>
 				</div>
-				<Avatar alt="Avatar" src={faker.image.avatar()} className={classes.avatar} />
+				<Link to='/profile'>
+					<Avatar
+						alt='Avatar'
+						src={faker.image.avatar()}
+						className={classes.avatar}
+					/>
+				</Link>
 			</AppBar>
 		</>
 	);
 };
 
 appBar.propTypes = {
-	classes: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(appBar);
