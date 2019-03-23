@@ -18,6 +18,9 @@ const styles = {
 		maxWidth: 800,
 		margin: '0 auto'
 	},
+	cardContent: {
+		backgroundColor: '#E8E9EB'
+	},
 	media: {
 		height: 200,
 		width: 200
@@ -66,21 +69,21 @@ function Profile(props) {
 							{uProfile.name}
 						</Typography>
 
-						<CardActionArea>
-							<CardMedia
-								className={classes.media}
-								image={uProfile.picture}
-								title='Contemplative Reptile'
-							/>
-							<CardContent>
-								<Typography gutterBottom variant='h5' component='h2'>
-									{uProfile.nickname}
-								</Typography>
-								<Typography component='p'>
-									<pre>{JSON.stringify(uProfile, null, 2)}</pre>
-								</Typography>
-							</CardContent>
-						</CardActionArea>
+						{/* <CardActionArea> */}
+						<CardMedia
+							className={classes.media}
+							image={uProfile.picture}
+							title='Contemplative Reptile'
+						/>
+						<CardContent className={classes.cardContent}>
+							<Typography gutterBottom variant='h5' component='h2'>
+								{uProfile.nickname}
+							</Typography>
+							<Typography component='p'>
+								<pre>{JSON.stringify(uProfile, null, 2)}</pre>
+							</Typography>
+						</CardContent>
+						{/* </CardActionArea> */}
 						<CardActions>
 							<Button size='small' color='primary'>
 								Edit
