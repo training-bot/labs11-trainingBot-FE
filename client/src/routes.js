@@ -2,10 +2,11 @@ import React from 'react';
 import { Redirect, Route, Router } from 'react-router-dom';
 import App from './App';
 import Home from './components/Dashboard/Dashboard';
-import Profile from './components/Profile/profile';
+// import Profile from './components/Profile/profile';
 import Callback from './Callback/callback';
 import Auth from './Auth/Auth';
 import history from './history';
+import ProfileView from './components/Profile/ProfileView';
 
 const auth = new Auth();
 
@@ -27,7 +28,7 @@ export const makeMainRoutes = () => {
 						!auth.isAuthenticated() ? (
 							<Redirect to="/home" />
 						) : (
-							<Profile auth={auth} {...props} />
+							<ProfileView auth={auth} {...props} />
 						)
 					}
 				/>
