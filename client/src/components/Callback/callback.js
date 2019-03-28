@@ -3,13 +3,15 @@ import React, { Component } from "react";
 import loading from "./loading.svg";
 
 //Auth
-import { setAccessToken, setIdToken } from "../../Auth/Auth";
+import { setAccessToken, setIdToken, getUserProfile } from "../../Auth/Auth";
 import history from "../../history";
+import { getUser } from "../../store/actions";
 
 class Callback extends Component {
   componentDidMount() {
     setAccessToken();
     setIdToken();
+    getUserProfile(() => {});
     history.push("/home");
   }
   render() {

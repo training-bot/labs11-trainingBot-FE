@@ -1,41 +1,38 @@
 // parent component for app once logged in
-import React from 'react';
-
+import React from "react";
 //Routing
-import {Link} from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 //Styling
-import styled from 'styled-components';
-
+import styled from "styled-components";
 //Components
-import AppBar from '../AppBar/AppBar';
-import TeamMembersView from '../TeamMembers/TeamMembersView';
-import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
-import {NavigationView} from '../Navigation';
-
-//Axios
-import axios from 'axios';
-
+import AppBar from "../AppBar/AppBar";
+import TeamMembersView from "../TeamMembers/TeamMembersView";
+import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
+import { NavigationView } from "../Navigation";
 //Auth
-import {getUserProfile} from '../../Auth/Auth';
-import Authenticate from '../authenticate/authenticate';
+import Authenticate from "../authenticate/authenticate";
+//State Management
+import { connect } from "react-redux";
+import { getUser } from "../../store/actions/userActions";
 
 class Dashboard extends React.Component {
   state = {
-    tabValue: 0,
-    user: {},
-    doneLoading: false,
-    refreshCount: 0,
+    tabValue: 0
   };
 
   componentDidMount() {
-    this.getProfile();
+    this.props.getUser();
   }
-
+  // tracking the tab value in navigation.js
+  changeTabValue = value => {
+    this.setState({
+      tabValue: value
+    });
+  };
   render() {
     return (
       <>
-        {this.state.doneLoading && (
+        {this.props.doneLoading && (
           <>
             <AppBar />
             <DashboardContainer>
@@ -46,12 +43,14 @@ class Dashboard extends React.Component {
               <div>
                 <div style={this.state.tabValue === 0 ? active : hidden}>
                   <TrainingSeriesView
-                    userId={this.state.user.user.userID}
+                    userId={this.props.userProfile.user.userID}
                     match={this.props.match}
                   />
                 </div>
                 <div style={this.state.tabValue === 1 ? active : hidden}>
-                  <TeamMembersView userId={this.state.user.user.userID} />
+                  <TeamMembersView
+                    userId={this.props.userProfile.user.userID}
+                  />
                 </div>
               </div>
             </DashboardContainer>
@@ -60,35 +59,22 @@ class Dashboard extends React.Component {
       </>
     );
   }
-
-  // tracking the tab value in navigation.js
-  changeTabValue = value => {
-    this.setState({
-      tabValue: value,
-    });
-  };
-  //Gets the users Profile
-  getProfile = () => {
-    getUserProfile(() => {
-      const userData = JSON.parse(localStorage.getItem('Profile'));
-      const {email, name} = userData;
-      axios
-        .post(`${process.env.REACT_APP_API}/api/auth`, {
-          email,
-          name,
-        })
-        .then(res => {
-          let userData = res.data;
-          this.setState({user: {...userData}, doneLoading: true});
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
-  };
 }
 
-export default Authenticate(Dashboard);
+const mapStateToProps = state => {
+  return {
+    userProfile: state.userReducer.userProfile,
+    isLoading: state.userReducer.isLoading,
+    doneLoading: state.userReducer.doneLoading
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    getUser
+  }
+)(Authenticate(Dashboard));
 
 //Styled Components
 const DashboardContainer = styled.div`
@@ -96,11 +82,11 @@ const DashboardContainer = styled.div`
 `;
 
 const hidden = {
-  display: 'none',
+  display: "none"
 };
 
 const active = {
-  display: 'block',
+  display: "block"
 };
 
 // const toggleTrainingSeries = tabValue => {
