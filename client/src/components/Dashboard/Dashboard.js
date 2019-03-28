@@ -1,23 +1,40 @@
 // parent component for app once logged in
 import React from "react";
+
 //Routing
 import { Link } from "react-router-dom";
 //Styling
 import styled from "styled-components";
+
 //Components
 import AppBar from "../AppBar/AppBar";
 import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 import { NavigationView } from "../Navigation";
+
 //Auth
 import Authenticate from "../authenticate/authenticate";
+
 //State Management
 import { connect } from "react-redux";
 import { getUser } from "../../store/actions/userActions";
 
+import ProgressCircle from "../Progress/ProgressCircle";
+
+//Axios
+import axios from "axios";
+
+//Auth
+import { getUserProfile } from "../../Auth/Auth";
+import Authenticate from "../authenticate/authenticate";
+
 class Dashboard extends React.Component {
   state = {
-    tabValue: 0
+    tabValue: 0,
+    user: {},
+    doneLoading: false,
+    refreshCount: 0
+
   };
 
   componentDidMount() {
@@ -32,9 +49,10 @@ class Dashboard extends React.Component {
   render() {
     return (
       <>
-        {this.props.doneLoading && (
+        {!this.state.doneLoading ? (
+          <ProgressCircle />
+        ) : (
           <>
-            <AppBar />
             <DashboardContainer>
               <NavigationView
                 tabValue={this.state.tabValue}

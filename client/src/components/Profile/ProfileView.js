@@ -1,17 +1,26 @@
+
 import React from "react";
 //Stripe
 import { Elements, StripeProvider } from "react-stripe-elements";
 import CheckoutForm from "../Stripe/CheckoutForm";
+import { Button, Card, CardActions, CardMedia, Typography, withStyles } from '@material-ui/core';
+import styled from 'styled-components';
+import StripeView from '../Stripe/StripeView';
 
 //Authentication
 import Authenticate from "../authenticate/authenticate";
+import { getUserProfile, logout } from '../../Auth/Auth';
+
+import AppBar from '../AppBar/AppBar';
+
+//Axios
+import axios from 'axios';
 
 //State Management
 import { getUser } from "../../store/actions/userActions";
 import { connect } from "react-redux";
-//Styling
-import AppBar from "../AppBar/AppBar";
 
+//Styling
 import {
   Button,
   Card,
@@ -21,25 +30,39 @@ import {
   withStyles
 } from "@material-ui/core";
 import styled from "styled-components";
-
 const styles = {
-  card: {
-    maxWidth: 800,
-    margin: "0 auto"
-  },
-  cardContent: {
-    backgroundColor: "#E8E9EB"
-  },
-  media: {
-    height: 200,
-    width: 200
-  }
+	card: {
+		maxWidth: 800,
+		margin: '0 auto',
+	},
+	cardContent: {
+		backgroundColor: '#E8E9EB',
+	},
+	media: {
+		height: 200,
+		width: 200,
+	},
 };
 
 class ProfileView extends React.Component {
+  componentDidMount() {
+		//Gets the user profile and assigns it to state
+		const user = JSON.parse(localStorage.getItem('Profile'));
+		this.setState({ userProfile: user });
+		
+	}
   render() {
-    const { classes } = this.props;
+		const { classes } = this.props;
+		let accountType;
+		let type = this.state.user.accountTypeID;
 
+		if (type === 3) {
+			accountType = <span>Pro</span>;
+		} else if (type === 2) {
+			accountType = <span>Premium</span>;
+		} else if (type === 1) {
+			accountType = <span>Free</span>;
+		}
     return (
       <StripeProvider apiKey='pk_test_L76yOnUDjq2cNP8heEH9MkpA00Ktyd3MYn'>
         <Container>
@@ -75,7 +98,7 @@ class ProfileView extends React.Component {
       </StripeProvider>
     );
   }
-}
+
 
 const mapStateToProps = state => {
   return {
