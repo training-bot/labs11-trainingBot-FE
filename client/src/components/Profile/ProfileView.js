@@ -16,7 +16,6 @@ import {
   Button,
   Card,
   CardActions,
-  // CardContent,
   CardMedia,
   Typography,
   withStyles
@@ -37,14 +36,7 @@ const styles = {
   }
 };
 
-const Container = styled.div`
-  margin-top: 80px;
-`;
-
 class ProfileView extends React.Component {
-  componentDidMount() {
-    this.props.getUser();
-  }
   render() {
     const { classes } = this.props;
 
@@ -52,7 +44,7 @@ class ProfileView extends React.Component {
       <StripeProvider apiKey='pk_test_L76yOnUDjq2cNP8heEH9MkpA00Ktyd3MYn'>
         <Container>
           <AppBar />
-          {/* <div className='profile-area'>
+          <div className='profile-area'>
             <Card className={classes.card}>
               <Typography gutterBottom variant='h5' component='h1'>
                 {this.props.userProfile.name}
@@ -64,7 +56,7 @@ class ProfileView extends React.Component {
                 title='Contemplative Reptile'
               />
               <Typography gutterBottom variant='h5' component='h5'>
-                {this.props.user.email}
+                {this.props.userProfile.email}
               </Typography>
               <CardActions>
                 <Button size='small' color='primary'>
@@ -78,7 +70,7 @@ class ProfileView extends React.Component {
           </div>
           <Elements>
             <CheckoutForm user={this.props.user} />
-          </Elements> */}
+          </Elements>
         </Container>
       </StripeProvider>
     );
@@ -97,3 +89,9 @@ export default connect(
     getUser
   }
 )(withStyles(styles)(Authenticate(ProfileView)));
+
+//Styled components
+
+const Container = styled.div`
+  margin-top: 80px;
+`;
