@@ -3,6 +3,7 @@ import React from 'react';
 
 //Styling
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 
 class LandingPageView extends React.Component {
   render() {
@@ -10,7 +11,16 @@ class LandingPageView extends React.Component {
       <>
         <LandingPageContainer>
           <LandingPageContentContainer>
-            <h1>contect</h1>
+            <h1>Training Bot</h1>
+            <p>
+              “Training Bot empowers team leaders with tools to assist with
+              their team’s continual learning by sending automated Text
+              messages/emails on a scheduled interval to team members”.
+            </p>
+            <LandingPageButtonContainer>
+              <Button>Get Started</Button>
+              <Button type="outline">Learn More</Button>
+            </LandingPageButtonContainer>
           </LandingPageContentContainer>
         </LandingPageContainer>
       </>
@@ -28,6 +38,13 @@ const LandingPageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  h1 {
+    color: #3dbd93;
+    font-size: 42px;
+  }
+  p {
+    color: #3dbd93;
+  }
 `;
 const LandingPageContentContainer = styled.div`
   background-color: #FFFFFF
@@ -37,4 +54,14 @@ const LandingPageContentContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 100px;
+`;
+
+const LandingPageButtonContainer = styled.div`
+  display: flex;
+  button {
+    margin: 0 10px;
+
+    background-color: #3dbd93;
+  }
 `;
