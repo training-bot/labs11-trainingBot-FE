@@ -19,7 +19,7 @@ class LandingPageView extends React.Component {
             </p>
             <LandingPageButtonContainer>
               <Button>Get Started</Button>
-              <Button type="outline">Learn More</Button>
+              <Button variant="outlined">Learn More</Button>
             </LandingPageButtonContainer>
           </LandingPageContentContainer>
         </LandingPageContainer>
@@ -59,9 +59,17 @@ const LandingPageContentContainer = styled.div`
 
 const LandingPageButtonContainer = styled.div`
   display: flex;
-  button {
+  margin-top: 30px;
+  button:first-child {
     margin: 0 10px;
-
     background-color: #3dbd93;
+    color: white;
+  }
+  button:nth-child(2) {
+    border: 1px solid #3dbd93;
+    &: hover {
+      background-color: #3dbd93;
+      color: white;
+    }
   }
 `;
