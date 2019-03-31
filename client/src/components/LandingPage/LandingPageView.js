@@ -1,9 +1,9 @@
 // contains all components for landing page
-import React from 'react';
+import React from "react";
 
 //Styling
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
 
 class LandingPageView extends React.Component {
   render() {
@@ -19,7 +19,7 @@ class LandingPageView extends React.Component {
             </p>
             <LandingPageButtonContainer>
               <Button>Get Started</Button>
-              <Button variant="outlined">Learn More</Button>
+              <Button variant='outlined'>Learn More</Button>
             </LandingPageButtonContainer>
           </LandingPageContentContainer>
         </LandingPageContainer>
@@ -30,7 +30,6 @@ class LandingPageView extends React.Component {
 export default LandingPageView;
 
 const LandingPageContainer = styled.div`
-  max-width: 1280px;
   margin: 0 auto;
   background-color: #f0f4f8;
   height: 90vh;

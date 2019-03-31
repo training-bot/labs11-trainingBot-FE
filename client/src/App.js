@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 //Components
-import LandingPageView from './components/LandingPage/LandingPageView';
+import LandingPageView from "./components/LandingPage/LandingPageView";
 //Styling
-import CssBaseline from '@material-ui/core/CssBaseline';
-import styled from 'styled-components';
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 class App extends Component {
   render() {
@@ -15,9 +14,5 @@ class App extends Component {
     );
   }
 }
-
-const LoginContainer = styled.div`
-  margin-top: 150px;
-`;
 
 export default App;

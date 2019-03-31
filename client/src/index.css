@@ -1,3 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+  max-width: 1208px;
+  margin: 0 auto !important;
 }

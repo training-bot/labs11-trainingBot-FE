@@ -1,26 +1,26 @@
 // parent component for app once logged in
-import React from 'react';
+import React from "react";
 
 //Styling
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //Components
-import TeamMembersView from '../TeamMembers/TeamMembersView';
-import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
-import {NavigationView} from '../Navigation';
-import ProgressCircle from '../Progress/ProgressCircle';
+import TeamMembersView from "../TeamMembers/TeamMembersView";
+import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
+import { NavigationView } from "../Navigation";
+import ProgressCircle from "../Progress/ProgressCircle";
 
 //Auth
-import {getUserProfile} from '../../Auth/Auth';
-import Authenticate from '../authenticate/authenticate';
+import { getUserProfile } from "../../Auth/Auth";
+import Authenticate from "../authenticate/authenticate";
 
 //State Management
-import {connect} from 'react-redux';
-import {getUser} from '../../store/actions/userActions';
+import { connect } from "react-redux";
+import { getUser } from "../../store/actions/userActions";
 
 class Dashboard extends React.Component {
   state = {
-    tabValue: 0,
+    tabValue: 0
   };
 
   componentDidMount() {
@@ -30,7 +30,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const {user} = this.props.userProfile;
+    const { user } = this.props.userProfile;
     console.log(this.props);
     return (
       <>
@@ -64,7 +64,7 @@ class Dashboard extends React.Component {
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
-      tabValue: value,
+      tabValue: value
     });
   };
 }
@@ -72,14 +72,14 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
-    doneLoading: state.userReducer.doneLoading,
+    doneLoading: state.userReducer.doneLoading
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getUser,
+    getUser
   }
 )(Authenticate(Dashboard));
 
@@ -89,11 +89,11 @@ const DashboardContainer = styled.div`
 `;
 
 const hidden = {
-  display: 'none',
+  display: "none"
 };
 
 const active = {
-  display: 'block',
+  display: "block"
 };
 
 // const toggleTrainingSeries = tabValue => {
