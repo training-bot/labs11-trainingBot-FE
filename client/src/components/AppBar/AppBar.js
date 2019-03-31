@@ -11,7 +11,6 @@ import { login, logout } from "../../Auth/Auth";
 
 class AppBar extends Component {
   render() {
-    const Profile = JSON.parse(localStorage.getItem("Profile"));
     return (
       <NavigationContainer>
         <NavigationTop />
@@ -35,7 +34,7 @@ class AppBar extends Component {
               <RightItemsContainer>
                 <Link to='/profile'>
                   {" "}
-                  <Avatar src={Profile.picture} />
+                  <Avatar />
                 </Link>
                 <a onClick={() => logout()}>Logout</a>
               </RightItemsContainer>
@@ -64,12 +63,16 @@ const NavigationTop = styled.div`
 `;
 const NavItemsContainer = styled.div`
   display: flex;
+  box-sizing: border-box;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;
-  padding: 0px 30px;
+  padding: 0px 40px;
   width: 100%;
+  @media only screen and (max-width: 600px) {
+    padding: 0;
+  }
   a {
     margin: 0 10px;
     text-decoration: none;
