@@ -1,24 +1,24 @@
 // HOC for client-side authorization, protecting routes that require authentication
 
-import React from "react";
+import React from 'react';
 
 //Styling
-import styled from "styled-components";
-import Logo from "../../img/training-bot.png";
+import styled from 'styled-components';
+import Logo from '../../img/training-bot.png';
 
 //Authentication
-import { login } from "../../Auth/Auth";
+import {login} from '../../Auth/Auth';
 
 export default function(Component) {
   return class Authenticate extends Component {
     render() {
-      const token = localStorage.getItem("id_token");
-
+      const token = localStorage.getItem('id_token');
+      console.log(token);
       const notLoggedIn = (
         <LoginContainer>
           <LoginContent>
             <LogoContainer src={Logo} />
-            <p>Please Login to see the users</p>
+            <p>Please Login to see this page</p>
             <button onClick={e => login()}>Login</button>
           </LoginContent>
         </LoginContainer>

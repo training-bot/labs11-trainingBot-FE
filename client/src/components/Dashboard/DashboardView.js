@@ -25,7 +25,7 @@ import PostPage from '../TrainingSeries/PostPage';
 import NotificationsView from '../Notifications/NotificationsView';
 import AssignMemberPage from '../TeamMembers/TeamMemberPageContainer/AssignMemberPage';
 
-//Authentication
+//Authentication HOC
 import Authenticate from '../authenticate/authenticate';
 
 //State Management
