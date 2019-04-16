@@ -97,7 +97,7 @@ class AddMember extends Component {
   handleChange = event => {
     this.setState({ name: event.target.value });
     console.log(event.target)
-    this.props.handler.handleChecked(event.target.dataID)
+    // this.props.handler.handleChecked(event.target.dataID)
   };
 
     filteredMembers(){
@@ -108,7 +108,7 @@ class AddMember extends Component {
         return !assignments.includes(member.teamMemberID);
       });
      return filteredMembers.map(name => (
-        <MenuItem key={name.teamMemberID} dataID={name.teamMemberID} value={`${name.firstName} ${name.lastName}`}  >
+        <MenuItem key={name.teamMemberID}  value={`${name.firstName} ${name.lastName}`}  onChange={() => this.props.handler.handleChecked(name.teamMemberID)}>
           {name.firstName} {name.lastName}
         </MenuItem>
       ))}
@@ -163,6 +163,7 @@ class AddMember extends Component {
                   <Select
                     multiple
                     value={this.state.name}
+                    name={this.state.memberID}
                     onChange={this.handleChange}
                     input={<Input id="select-multiple-chip" />}
                     renderValue={selected => (
