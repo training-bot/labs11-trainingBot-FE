@@ -39,8 +39,6 @@ class AddMembersView extends Component {
 			startDate: '',
 			selectedTeamMembers: [],
 			isRouting: false,
-			offset: 0,
-			limit: 5,
 		};
 	}
 
@@ -78,20 +76,7 @@ class AddMembersView extends Component {
 					assignments={this.props.assignments}
 					handler={this.handler}
 					isRouting={this.state.isRouting}
-					limit={this.state.limit}
-					offset={this.state.offset}
 				/>
-				{/****** Following used for pagination ******/}
-				{/* 
-				<div className={classes.footer}>
-					<Pagination
-						limit={this.state.limit}
-						offset={this.state.offset}
-						total={this.props.teamMembers.length}
-						centerRipple={true}
-						onClick={(e, offset) => this.handleClick(offset)}
-					/>
-				</div> */}
 			</Paper>
 		);
 	}
@@ -114,6 +99,7 @@ class AddMembersView extends Component {
 			this.setState({ isRouting: true });
 		},
 		handleChecked: id => {
+
 			if (!this.state.selectedTeamMembers.includes(id)) {
 				this.setState({
 					...this.state,
