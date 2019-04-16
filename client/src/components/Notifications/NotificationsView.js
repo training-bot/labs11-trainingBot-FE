@@ -133,7 +133,7 @@ class NotificationsView extends Component {
     const notificationCount = filteredReturn.length;
 
     return (
-      <Paper className={classes.root} elevation={2}>
+      <Paper data-tour="5" className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
           <Typography variant="h5">
             {this.state.filterSent === "pending"
