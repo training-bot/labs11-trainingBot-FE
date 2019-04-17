@@ -13,6 +13,7 @@ import Divider from "@material-ui/core/Divider";
 import TrainingBotGIF from "../../../img/trainingBot.gif";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import purple from '@material-ui/core/colors/purple';
 
 //State Management
 import { addTeamMember } from "../../../store/actions";
@@ -238,10 +239,11 @@ class TeamMemberPage extends React.Component {
 											textDisabled ? null : this.handleToggleChange("textOn")
 										}
 										value='textOn'
-										color='primary'
+										color="default"
+										style={this.state.teamMember.textOn ? { color: '#451476' } : { color: "#edeaea" }}
 									/>
 								}
-								label='Texts Active'
+								label={this.state.teamMember.textOn ? 'Texts Active' : 'Texts Inactive'}
 							/>
 							<FormControlLabel
 								control={
@@ -251,10 +253,11 @@ class TeamMemberPage extends React.Component {
 											emailDisabled ? null : this.handleToggleChange("emailOn")
 										}
 										value='emailOn'
-										color='primary'
+										color="default"
+										style={this.state.teamMember.emailOn ? { color: '#451476' } : { color: "#edeaea" }}
 									/>
 								}
-								label='Email Active'
+								label={this.state.teamMember.emailOn ? 'Email Active' : 'Email Inactive'}
 							/>
 						</ButtonContainer>
 						<ButtonContainer>
@@ -269,8 +272,8 @@ class TeamMemberPage extends React.Component {
 								{this.state.isRouting ? (
 									<LoadingImage src={TrainingBotGIF} alt='Loading Icon' />
 								) : (
-									"Add Member"
-								)}
+										"Add Member"
+									)}
 							</Button>
 							<Button
 								className={classes.button}
