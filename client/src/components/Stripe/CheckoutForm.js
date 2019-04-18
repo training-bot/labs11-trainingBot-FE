@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { CardElement, injectStripe } from "react-stripe-elements";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { CardElement, injectStripe } from 'react-stripe-elements';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   getPlans,
   getCustomersPlan,
   unsubscribe,
   submit
-} from "../../store/actions/";
-import { getUser } from "../../store/actions/userActions";
+} from '../../store/actions/';
+import { getUser } from '../../store/actions/userActions';
 
 import {
   withStyles,
@@ -16,55 +16,55 @@ import {
   Button,
   Typography,
   Modal
-} from "@material-ui/core/";
-import UnsubscribeModal from "./unsubscribeModal";
-import TrainingBotGIF from "../../img/trainingBot.gif";
+} from '@material-ui/core/';
+import UnsubscribeModal from './unsubscribeModal';
+import TrainingBotGIF from '../../img/trainingBot.gif';
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
+    position: 'absolute',
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none"
+    outline: 'none'
   },
   submitBtn: {
     maxWidth: 150,
-    width: "100%",
-    background: "#451476",
-    color: "white",
-    margin: "20px auto",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    width: '100%',
+    background: '#451476',
+    color: 'white',
+    margin: '20px auto',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     }
   },
   root: {
-    margin: "20 auto",
-    width: "100%",
+    margin: '20 auto',
+    width: '100%',
     maxWidth: 800,
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   },
   formControl: {
-    display: "flex",
-    margin: "15px 5px"
+    display: 'flex',
+    margin: '15px 5px'
   },
   paymentForm: {
-    display: "flex",
-    margin: "30px 90px 0 90px",
-    "@media (max-width: 720px)": {
-      margin: "30px 40px 0 40px"
+    display: 'flex',
+    margin: '30px 90px 0 90px',
+    '@media (max-width: 720px)': {
+      margin: '30px 40px 0 40px'
     }
   },
   buttonLayout: {
-    display: "flex",
-    justifyContent: "space-around",
-    margin: "0 auto",
-    "@media (max-width: 720px)": {
-      justifyContent: "center",
-      flexWrap: "wrap"
+    display: 'flex',
+    justifyContent: 'space-around',
+    margin: '0 auto',
+    '@media (max-width: 720px)': {
+      justifyContent: 'center',
+      flexWrap: 'wrap'
     }
   },
   submitButton: {
@@ -73,77 +73,77 @@ const styles = theme => ({
   },
 
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200
   },
-  progress: { margin: "50px auto", maxWidth: 100, width: 100 },
+  progress: { margin: '50px auto', maxWidth: 100, width: 100 },
   subCard: {
-    border: "1px solid #EBEBEB",
-    borderRadiusTopLeft: "3px",
-    borderRadiusTopRight: "3px",
-    width: "31%",
+    border: '1px solid #EBEBEB',
+    borderRadiusTopLeft: '3px',
+    borderRadiusTopRight: '3px',
+    width: '31%',
     minWidth: 201,
     margin: 5,
-    textAlign: "center"
+    textAlign: 'center'
   },
   title: {
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
     fontWeight: 700,
     margin: 10
   },
   price: {
     fontSize: 20,
-    margin: "10px 0"
+    margin: '10px 0'
   },
   subPrice: {
     fontSize: 12,
-    color: "grey"
+    color: 'grey'
   },
   content: {
-    margin: "15px auto",
-    width: "80%"
+    margin: '15px auto',
+    width: '80%'
   },
   feature: {
-    padding: "5px 0"
+    padding: '5px 0'
   },
   spread: {
-    display: "flex",
-    justifyContent: "space-between"
+    display: 'flex',
+    justifyContent: 'space-between'
   },
   button: {
-    position: "sticky",
-    top: "100%",
-    width: "100%",
+    position: 'sticky',
+    top: '100%',
+    width: '100%',
     marginTop: 10,
-    background: "#441476",
-    color: "white",
+    background: '#441476',
+    color: 'white',
     borderRadius: 0,
-    "&:hover": {
-      background: "#591a99"
+    '&:hover': {
+      background: '#591a99'
     },
-    "&:disabled": {
-      color: "grey",
-      background: "#EBEBEB"
+    '&:disabled': {
+      color: 'grey',
+      background: '#EBEBEB'
     }
   },
   LoadingImg: {
-    height: "auto",
-    overflow: "hidden",
-    cursor: "not-allowed",
-    pointerEvents: "none",
-    position: "relative",
+    height: 'auto',
+    overflow: 'hidden',
+    cursor: 'not-allowed',
+    pointerEvents: 'none',
+    position: 'relative',
     padding: 0,
-    margin: "20px auto"
+    margin: '20px auto'
   },
   gifWrapper: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center"
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center'
   }
 });
 
@@ -152,17 +152,17 @@ class CheckoutForm extends Component {
     super(props);
     this.state = {
       complete: false,
-      plans: "",
-      billingName: "",
-      billingEmail: "",
-      plan: "",
+      plans: '',
+      billingName: '',
+      billingEmail: '',
+      plan: '',
       paymentToggle: false,
       pro: false,
       premium: false,
       open: false,
-      buttonState: "",
-      error: "",
-      activeSelect: ""
+      buttonState: '',
+      error: '',
+      activeSelect: ''
     };
   }
   handleOpen = () => {
@@ -179,7 +179,7 @@ class CheckoutForm extends Component {
 
   handleChange = (e, nickname) => {
     e.preventDefault();
-    if (e.currentTarget.name === "plan") {
+    if (e.currentTarget.name === 'plan') {
       this.setState({
         paymentToggle: true,
         buttonState: nickname,
@@ -191,13 +191,12 @@ class CheckoutForm extends Component {
     });
   };
 
-
   createToken = async email => {
     try {
       let { token } = await this.props.stripe.createToken({ email: email });
       return token.id;
     } catch (err) {
-      this.setState({ error: "Please enter payment information" });
+      this.setState({ error: 'Please enter payment information' });
     }
   };
 
@@ -209,10 +208,10 @@ class CheckoutForm extends Component {
       await this.props.submit(token, name, email, userID, stripe, plan);
       this.setState({
         paymentToggle: false,
-        activeSelect: ""
+        activeSelect: ''
       });
     } else {
-      this.setState({ error: "Please enter payment information" });
+      this.setState({ error: 'Please enter payment information' });
     }
   };
 
@@ -225,9 +224,9 @@ class CheckoutForm extends Component {
     const { classes } = this.props;
     let accountType;
     if (this.props.userProfile.accountTypeID === 2) {
-      accountType = "Premium";
+      accountType = 'Premium';
     } else if (this.props.userProfile.accountTypeID === 3) {
-      accountType = "Pro";
+      accountType = 'Pro';
     }
 
     let freeButton;
@@ -237,8 +236,7 @@ class CheckoutForm extends Component {
         <Button
           color="primary"
           className={classes.button}
-          onClick={this.handleOpen}
-        >
+          onClick={this.handleOpen}>
           Basic
         </Button>
       );
@@ -286,9 +284,9 @@ class CheckoutForm extends Component {
                 {freeButton}
               </div>
 
-              {this.props.plans.map(plan => {
+              {this.props.plans.map((plan, index) => {
                 return plan.nickname === accountType ? (
-                  <div className={classes.subCard}>
+                  <div key={index} className={classes.subCard}>
                     <Typography className={classes.title}>
                       {plan.nickname}
                     </Typography>
@@ -311,63 +309,65 @@ class CheckoutForm extends Component {
                           Message Limit
                         </Typography>
                         <Typography className={classes.feature}>
-
-                          {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
-
+                          {plan.nickname === 'Premium'
+                            ? '200 / mo'
+                            : '1000 / mo'}
                         </Typography>
                       </div>
                     </div>
                     <Button
                       key={plan.created}
                       className={classes.button}
-                      disabled
-                    >
+                      disabled>
                       Current Plan
                     </Button>
                   </div>
                 ) : (
-                    <div className={classes.subCard}>
-                      <Typography className={classes.title}>
-                        {plan.nickname}
+                  <div key={index} className={classes.subCard}>
+                    <Typography className={classes.title}>
+                      {plan.nickname}
+                    </Typography>
+                    <Typography className={classes.price}>
+                      ${plan.amount / 100}
+                      <span className={classes.subPrice}> / mo</span>
+                    </Typography>
+                    <div className={classes.content}>
+                      <Typography className={classes.feature}>
+                        Automated Text/Email
                       </Typography>
-                      <Typography className={classes.price}>
-                        ${plan.amount / 100}
-                        <span className={classes.subPrice}> / mo</span>
+                      <Typography className={classes.feature}>
+                        Unlimited Training Series
                       </Typography>
-                      <div className={classes.content}>
+                      <Typography className={classes.feature}>
+                        Unlimited Team Members
+                      </Typography>
+                      <div className={classes.spread}>
                         <Typography className={classes.feature}>
-                          Automated Text/Email
-                      </Typography>
-                        <Typography className={classes.feature}>
-                          Unlimited Training Series
-                      </Typography>
-                        <Typography className={classes.feature}>
-                          Unlimited Team Members
-                      </Typography>
-                        <div className={classes.spread}>
-                          <Typography className={classes.feature}>
-                            Message Limit
+                          Message Limit
                         </Typography>
-                          <Typography className={classes.feature}>
-
-                            {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
-
-                          </Typography>
-                        </div>
+                        <Typography className={classes.feature}>
+                          {plan.nickname === 'Premium'
+                            ? '200 / mo'
+                            : '1000 / mo'}
+                        </Typography>
                       </div>
-                      <Button
-                        key={plan.created}
-                        color="primary"
-                        name="plan"
-                        className={classes.button}
-                        value={plan.id}
-                        onClick={e => this.handleChange(e, plan.nickname)}
-                        style={this.state.activeSelect === plan.nickname ? { background: '#3DBC93' } : null}
-                      >
-                        {plan.nickname}
-                      </Button>
                     </div>
-                  );
+                    <Button
+                      key={plan.created}
+                      color="primary"
+                      name="plan"
+                      className={classes.button}
+                      value={plan.id}
+                      onClick={e => this.handleChange(e, plan.nickname)}
+                      style={
+                        this.state.activeSelect === plan.nickname
+                          ? { background: '#3DBC93' }
+                          : null
+                      }>
+                      {plan.nickname}
+                    </Button>
+                  </div>
+                );
               })}
             </div>
           </FormControl>
@@ -382,18 +382,17 @@ class CheckoutForm extends Component {
             </div>
           ) : this.state.paymentToggle ? (
             <FormControl component="fieldset" className={classes.paymentForm}>
-              <CardElement style={{ base: { fontSize: "18px" } }} />
+              <CardElement style={{ base: { fontSize: '18px' } }} />
               <Button
                 variant="contained"
                 className={classes.submitBtn}
-                onClick={this.submit}
-              >
+                onClick={this.submit}>
                 Submit Payment
               </Button>
             </FormControl>
           ) : (
-                <span />
-              )}
+            <span />
+          )}
         </div>
 
         {/* Unsubscribe Modal */}
@@ -401,8 +400,7 @@ class CheckoutForm extends Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
-          onClose={this.handleClose}
-        >
+          onClose={this.handleClose}>
           <UnsubscribeModal handleClose={this.handleClose} unsub={this.unsub} />
         </Modal>
       </div>

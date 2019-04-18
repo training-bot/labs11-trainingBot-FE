@@ -1,91 +1,91 @@
-import React from "react";
-import NumberFormat from "react-number-format";
+import React from 'react';
+import NumberFormat from 'react-number-format';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import TrainingBotGIF from "../../../img/trainingBot.gif";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import TrainingBotGIF from '../../../img/trainingBot.gif';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 //State Management
-import { addTeamMember } from "../../../store/actions";
-import { connect } from "react-redux";
+import { addTeamMember } from '../../../store/actions';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
   paper: {
-    width: "89%",
+    width: '89%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none",
-    margin: "5px auto",
+    outline: 'none',
+    margin: '5px auto',
 
-    "@media (max-width: 768px)": {
-      width: "89%",
-      textAlign: "center",
-      padding: "30px"
+    '@media (max-width: 768px)': {
+      width: '89%',
+      textAlign: 'center',
+      padding: '30px'
     },
 
-    "@media (max-width: 480px)": {
-      width: "80%",
+    '@media (max-width: 480px)': {
+      width: '80%',
       // padding: 0,
-      margin: "5px auto"
+      margin: '5px auto'
     }
   },
   form: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "0 auto"
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0 auto'
   },
   info: {
-    "margin-right": "50px"
+    'margin-right': '50px'
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%"
+    width: '100%'
   },
   fab: {
     margin: theme.spacing.unit
   },
   button: {
-    "margin-left": theme.spacing.unit
+    'margin-left': theme.spacing.unit
   },
   addButton: {
-    "margin-left": theme.spacing.unit,
-    background: "#451476",
-    color: "white",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    'margin-left': theme.spacing.unit,
+    background: '#451476',
+    color: 'white',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     }
   },
   divider: {
-    margin: "15px 0"
+    margin: '15px 0'
   },
   color: {
-    color: "red"
+    color: 'red'
   }
 });
 
 class TeamMemberPage extends React.Component {
   state = {
     teamMember: {
-      firstName: "",
-      lastName: "",
-      jobDescription: "",
-      email: "",
-      phoneNumber: "",
-      userID: "",
+      firstName: '',
+      lastName: '',
+      jobDescription: '',
+      email: '',
+      phoneNumber: '',
+      userID: '',
       textOn: true,
       emailOn: false
     },
@@ -132,7 +132,7 @@ class TeamMemberPage extends React.Component {
 
   handleCancel = e => {
     e.preventDefault();
-    this.props.history.push("/home");
+    this.props.history.push('/home');
   };
 
   render() {
@@ -175,12 +175,12 @@ class TeamMemberPage extends React.Component {
             <Divider className={classes.divider} />
             <MemberInfoContainer>
               <TextField
-                autoFocus="true"
+                autoFocus={true}
                 id="standard-name"
                 label="First Name"
                 className={classes.textField}
                 value={this.state.teamMember.firstName}
-                onChange={this.handleChange("firstName")}
+                onChange={this.handleChange('firstName')}
                 margin="normal"
                 required
               />
@@ -189,7 +189,7 @@ class TeamMemberPage extends React.Component {
                 label="Last Name"
                 className={classes.textField}
                 value={this.state.teamMember.lastName}
-                onChange={this.handleChange("lastName")}
+                onChange={this.handleChange('lastName')}
                 margin="normal"
                 required
               />
@@ -198,7 +198,7 @@ class TeamMemberPage extends React.Component {
                 label="Job Description"
                 className={classes.textField}
                 value={this.state.teamMember.jobDescription}
-                onChange={this.handleChange("jobDescription")}
+                onChange={this.handleChange('jobDescription')}
                 margin="normal"
                 required
               />
@@ -206,7 +206,6 @@ class TeamMemberPage extends React.Component {
             <MemberInfoContainer>
               <NumberFormat
                 format="+1 (###) ###-####"
-                // mask='_'
                 type="tel"
                 inputProps={{ minLength: 10 }}
                 id="standard-name"
@@ -214,7 +213,7 @@ class TeamMemberPage extends React.Component {
                 customInput={TextField}
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange("phoneNumber")}
+                onChange={this.handleChange('phoneNumber')}
                 margin="normal"
                 required
               />
@@ -224,7 +223,7 @@ class TeamMemberPage extends React.Component {
                 type="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
-                onChange={this.handleChange("email")}
+                onChange={this.handleChange('email')}
                 margin="normal"
               />
             </MemberInfoContainer>
@@ -235,44 +234,44 @@ class TeamMemberPage extends React.Component {
                   <Switch
                     checked={this.state.teamMember.textOn}
                     onChange={
-                      textDisabled ? null : this.handleToggleChange("textOn")
+                      textDisabled ? null : this.handleToggleChange('textOn')
                     }
                     value="textOn"
-					color="default"
-					style={
-						this.state.teamMember.textOn
-						  ? { color: "#451476" }
-						  : { color: "#edeaea" }
-					  }
+                    color="default"
+                    style={
+                      this.state.teamMember.textOn
+                        ? { color: '#451476' }
+                        : { color: '#edeaea' }
+                    }
                   />
                 }
                 label={
                   this.state.teamMember.textOn
-                    ? "Texts Active"
-                    : "Texts Inactive"
+                    ? 'Texts Active'
+                    : 'Texts Inactive'
                 }
               />
               <FormControlLabel
                 control={
                   <Switch
-                    disabled={this.state.teamMember.email === ""}
+                    disabled={this.state.teamMember.email === ''}
                     checked={this.state.teamMember.emailOn}
                     onChange={
-                      emailDisabled ? null : this.handleToggleChange("emailOn")
+                      emailDisabled ? null : this.handleToggleChange('emailOn')
                     }
                     value="emailOn"
-					color="default"
-					style={
-						this.state.teamMember.emailOn
-						  ? { color: "#451476" }
-						  : { color: "#edeaea" }
-					  }
+                    color="default"
+                    style={
+                      this.state.teamMember.emailOn
+                        ? { color: '#451476' }
+                        : { color: '#edeaea' }
+                    }
                   />
                 }
                 label={
                   this.state.teamMember.emailOn
-                    ? "Email Active"
-                    : "Email Inactive"
+                    ? 'Email Active'
+                    : 'Email Inactive'
                 }
               />
             </ButtonContainer>
@@ -283,18 +282,16 @@ class TeamMemberPage extends React.Component {
                 }
                 variant="contained"
                 className={classes.addButton}
-                type="submit"
-              >
+                type="submit">
                 {this.state.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
                 ) : (
-                  "Add Member"
+                  'Add Member'
                 )}
               </Button>
               <Button
                 className={classes.button}
-                onClick={e => this.handleCancel(e)}
-              >
+                onClick={e => this.handleCancel(e)}>
                 Cancel
               </Button>
             </ButtonContainer>

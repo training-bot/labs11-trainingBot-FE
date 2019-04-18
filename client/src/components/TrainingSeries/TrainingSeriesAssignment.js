@@ -1,37 +1,30 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText } from "@material-ui/core/";
+import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import { ListItem, ListItemText } from '@material-ui/core/';
 
-import moment from "moment";
+import moment from 'moment';
 
 const styles = theme => ({
   listStyle: {
-    display: "flex",
-
-    padding: "5px"
+    display: 'flex',
+    padding: '5px'
   },
   listItem: {
-    // display: "flex",
-    // flexDirections: "column",
-    // width: "90%"
-    width: "79%",
+    width: '79%',
     height: 95,
-    display: "flex",
-    // justifyContent: "space-between",
-    // alignItems: "center",
-
-    "@media (max-width: 768px)": {
-      width: "100%",
-      margin: "0 auto",
-      textAlign: "center"
+    display: 'flex',
+    '@media (max-width: 768px)': {
+      width: '100%',
+      margin: '0 auto',
+      textAlign: 'center'
     }
   },
   bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)'
   },
   title: {
     fontSize: 14
@@ -47,7 +40,9 @@ const styles = theme => ({
 const TrainingSeriesAssignment = props => {
   const { classes } = props;
   // add hours to sendDate, formatting with moment ensures it displays properly on the FE
-  const formattedStartDate = moment(props.member.startDate).add(1, "hours").format('MMMM Do, YYYY')
+  const formattedStartDate = moment(props.member.startDate)
+    .add(1, 'hours')
+    .format('MMMM Do, YYYY');
   return (
     <ListStyles>
       <ListItem className={classes.listItem}>

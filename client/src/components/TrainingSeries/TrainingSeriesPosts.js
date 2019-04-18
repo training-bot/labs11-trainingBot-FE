@@ -350,9 +350,9 @@ class TrainingSeriesPosts extends React.Component {
               Assign Members
             </Button>
           </HeaderContainer>
-          {this.props.assignments.map(member => (
+          {this.props.assignments.map((member, index) => (
             <>
-              <TrainingSeriesAssignment member={member} />
+              <TrainingSeriesAssignment key={index} member={member} />
               <Divider />
             </>
           ))}
@@ -444,7 +444,7 @@ class TrainingSeriesPosts extends React.Component {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <i class="material-icons">search</i>
+                      <i className="material-icons">search</i>
                     </InputAdornment>
                   )
                 }}
@@ -457,8 +457,8 @@ class TrainingSeriesPosts extends React.Component {
             ) : (
               <ListStyles className={classes.listStyle}>
                 {sortedPosts.map(post => (
-                  <ListItemContainer>
-                    <ListItem key={post.postID} className={classes.listItem}>
+                  <ListItemContainer key={post.postID}>
+                    <ListItem className={classes.listItem}>
                       <ListItemText
                         primary={post.postName}
                         secondary={post.postDetails}

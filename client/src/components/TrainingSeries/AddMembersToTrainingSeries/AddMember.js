@@ -1,29 +1,34 @@
-import React from "react";
+import React from 'react';
 
 //Date Picker
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 
 //Styles
-import "react-datepicker/dist/react-datepicker.css";
-import { withStyles } from "@material-ui/core/styles";
-import {Button,Typography,Checkbox,FormControlLabel} from "@material-ui/core/";
-import styled from "styled-components";
+import 'react-datepicker/dist/react-datepicker.css';
+import { withStyles } from '@material-ui/core/styles';
+import {
+  Button,
+  Typography,
+  Checkbox,
+  FormControlLabel
+} from '@material-ui/core/';
+import styled from 'styled-components';
 
 //Icons & Images
-import TrainingBotGIF from "../../../img/trainingBot.gif";
+import TrainingBotGIF from '../../../img/trainingBot.gif';
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
+    position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none"
+    outline: 'none'
   },
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -38,36 +43,36 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
-    padding: "5px 16px",
-    background: "#451476",
-    color: "white",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    padding: '5px 16px',
+    background: '#451476',
+    color: 'white',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     },
-    "&:disabled": {
-      color: "grey",
-      backgroundColor: "lightgrey"
+    '&:disabled': {
+      color: 'grey',
+      backgroundColor: 'lightgrey'
     }
   },
   cancelButton: {
     margin: theme.spacing.unit,
-    padding: "5px 16px"
+    padding: '5px 16px'
   },
 
   memberList: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    height: "90%",
-    "@media (max-width:580px)": {
-      flexDirection: "column",
-      alignItems: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    height: '90%',
+    '@media (max-width:580px)': {
+      flexDirection: 'column',
+      alignItems: 'center'
     }
   },
   box: {
-    padding: "0 12px"
+    padding: '0 12px'
   },
   heading: {
     marginBottom: 40
@@ -75,7 +80,6 @@ const styles = theme => ({
 });
 
 function AddMember(props) {
-  //console.log(props);
   const { classes } = props;
 
   const renderMembers = () => {
@@ -90,10 +94,11 @@ function AddMember(props) {
     return filteredMembers.map(member => (
       <>
         <FormListItem
+          key={member.teamMemberID}
           control={
             <Checkbox
               className={classes.box}
-              name={member.teamMemberID}
+              name={member.teamMemberID.toString()}
               onChange={() => props.handler.handleChecked(member.teamMemberID)}
             />
           }
@@ -102,11 +107,11 @@ function AddMember(props) {
       </>
     ));
   };
-  //console.log(props.selectedTeamMembers);
+
   return (
     <>
       <Typography className={classes.heading} variant="h6">
-        Assign Team Members{" "}
+        Assign Team Members{' '}
       </Typography>
       <AddMemberContainer>
         {props.teamMembers.length ? (
@@ -120,7 +125,7 @@ function AddMember(props) {
               <DatePicker
                 inline
                 minDate={new Date()}
-                selected={props.startDate}
+                selected={new Date(props.startDate)}
                 onChange={props.handler.handleDateChange}
               />
             </DatePickerContainer>
@@ -134,19 +139,17 @@ function AddMember(props) {
                 variant="body1"
                 id="modal-title"
                 className={classes.memberList}
-                onSubmit={e => props.handler.handleSubmit(e)}
-              >
+                onSubmit={e => props.handler.handleSubmit(e)}>
                 <MemberListContainer>{renderMembers()}</MemberListContainer>
                 <ButtonContainer>
                   <Button
                     disabled={
                       props.selectedTeamMembers < 1 || props.isRouting === true
-                        ? "true"
+                        ? true
                         : null
                     }
                     type="submit"
-                    className={classes.button}
-                  >
+                    className={classes.button}>
                     {props.isRouting ? (
                       <LoadingImage src={TrainingBotGIF} alt="loader" />
                     ) : (
@@ -155,8 +158,7 @@ function AddMember(props) {
                   </Button>
                   <Button
                     onClick={props.handler.routeToPostPage}
-                    className={classes.cancelButton}
-                  >
+                    className={classes.cancelButton}>
                     Cancel
                   </Button>
                 </ButtonContainer>
@@ -166,7 +168,7 @@ function AddMember(props) {
         ) : (
           <h2>
             Please create at least one team member to allow assignment
-            functionality.{" "}
+            functionality.{' '}
           </h2>
         )}
       </AddMemberContainer>

@@ -17,11 +17,11 @@ const TrainingSeriesList = props => {
 
   return (
     <ListStyles>
-      {arr.map(series => (
-        <Suspense key={series.trainingSeriesID} fallback={<span />}>
+      {arr.map((series, index) => (
+        <Suspense key={index} fallback={<span />}>
           <TrainingSeries
             trainingSeriesID={series.trainingSeriesID}
-            key={series.trainingSeriesID}
+            key={index}
             deleteTrainingSeries={props.deleteTrainingSeries}
             data={series}
             match={props.match}

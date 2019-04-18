@@ -11,45 +11,45 @@ import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import {withRouter} from 'react-router';
+import { withRouter } from 'react-router';
 
 const variantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon,
-  info: InfoIcon,
+  info: InfoIcon
 };
 
 const styles1 = theme => ({
   success: {
-    backgroundColor: green[600],
+    backgroundColor: green[600]
   },
   error: {
-    backgroundColor: theme.palette.error.dark,
+    backgroundColor: theme.palette.error.dark
   },
   info: {
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.primary.dark
   },
   warning: {
-    backgroundColor: amber[700],
+    backgroundColor: amber[700]
   },
   icon: {
-    fontSize: 20,
+    fontSize: 20
   },
   iconVariant: {
     opacity: 0.9,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   message: {
     display: 'flex',
-    alignItems: 'center',
-  },
+    alignItems: 'center'
+  }
 });
 
 function MySnackbarContent(props) {
-  const {classes, className, message, onClose, variant, ...other} = props;
+  const { classes, className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
   return (
@@ -68,10 +68,9 @@ function MySnackbarContent(props) {
           aria-label="Close"
           color="inherit"
           className={classes.close}
-          onClick={onClose}
-        >
+          onClick={onClose}>
           <CloseIcon className={classes.icon} />
-        </IconButton>,
+        </IconButton>
       ]}
       {...other}
     />
@@ -82,13 +81,13 @@ const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 const styles2 = theme => ({
   margin: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 class CustomizedSnackbars extends React.Component {
   state = {
-    open: true,
+    open: true
   };
 
   handleClose = (event, reason) => {
@@ -96,7 +95,7 @@ class CustomizedSnackbars extends React.Component {
       return;
     }
 
-    this.setState({open: false});
+    this.setState({ open: false });
   };
 
   renderSnackBar = () => {
@@ -134,12 +133,11 @@ class CustomizedSnackbars extends React.Component {
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left',
+            horizontal: 'left'
           }}
           open={this.state.open}
           autoHideDuration={2000}
-          onClose={this.handleClose}
-        >
+          onClose={() => this.handleClose()}>
           {this.renderSnackBar}
         </Snackbar>
       </div>
