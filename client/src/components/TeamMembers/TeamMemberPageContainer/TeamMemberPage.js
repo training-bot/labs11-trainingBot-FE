@@ -24,6 +24,8 @@ import DeleteModal from "../../Modals/deleteModal";
 import { connect } from "react-redux";
 import { getTrainingSeries, editTeamMember } from "../../../store/actions";
 
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+
 const styles = theme => ({
   // these styles fixes the off-centering
   paper: {
@@ -129,7 +131,8 @@ class TeamMemberPage extends React.Component {
       emailOn: false
     },
     assignments: [],
-    trainingSeries: [] //Leigh-Ann: this may not be needed?
+    trainingSeries: [], //Leigh-Ann: this may not be needed?
+    phoneValid: false
   };
 
   componentDidMount() {
@@ -151,6 +154,16 @@ class TeamMemberPage extends React.Component {
         [name]: event.target.value
       }
     });
+    console.log(this.state.teamMember.phoneNumber)
+    if (name === "phoneNumber") {
+      const phoneNumber = parsePhoneNumberFromString(
+        this.state.teamMember.phoneNumber,
+        "US"
+      );
+
+      console.log(phoneNumber);
+      console.log(phoneNumber.isValid());
+    }
   };
 
   handleToggleChange = name => async event => {
@@ -331,12 +344,13 @@ class TeamMemberPage extends React.Component {
               />
             </MemberInfoContainer>
             <MemberInfoContainer>
-              <NumberFormat
-                format="+1 (###) ###-####"
-                mask="_"
+              <TextField
+                // format="+1 (###) ###-####"
+                // mask="_"
+                type='tel'
                 id="standard-name"
                 label="phone number"
-                customInput={TextField}
+                // customInput={TextField}
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
